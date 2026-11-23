@@ -56,7 +56,7 @@ Escolha o modo de execução desejado abaixo:
    ```
 4. Acesse no navegador:
    - **Aplicação Web (Front-End):** `http://localhost:3000`
-   - **API REST (Back-End):** `http://localhost:8080/api/v1`
+   
 
 Para parar os containers (mantendo os dados no volume):
 ```bash
