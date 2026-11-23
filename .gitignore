@@ -1,0 +1,30 @@
+# Variáveis de ambiente e segredos locais
+.env
+.env.*
+!.env.example
+!front-end/.env.example
+
+# Front-End (Nuxt 3 / Node.js)
+node_modules/
+front-end/node_modules/
+front-end/.nuxt/
+front-end/.output/
+front-end/.nitro/
+front-end/.cache/
+front-end/dist/
+
+# Back-End (Java / Maven)
+back-end/target/
+*.class
+*.jar
+*.war
+*.ear
+
+# IDEs e Sistema Operacional
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+*.swp

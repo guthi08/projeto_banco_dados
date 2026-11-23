@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+
+  /* Paleta Carbon adaptada para AERO-MONITOR */
+  --aero-bg: #f3f5f9;
+  --aero-surface: #ffffff;
+  --aero-surface-low: #f8fafc;
+  --aero-surface-container: #f1f5f9;
+  --aero-outline: #e2e8f0;
+
+  --aero-sidebar-bg: #131c2e;
+  --aero-sidebar-surface: #1b273d;
+  --aero-sidebar-hover: #23324d;
+  --aero-sidebar-active: #1f2e4a;
+  --aero-sidebar-border: #26354f;
+  --aero-sidebar-ink: #f8fafc;
+  --aero-sidebar-muted: #94a3b8;
+
+  --aero-ink: #0f172a;
+  --aero-ink-variant: #475569;
+  --aero-ink-muted: #64748b;
+
+  --aero-primary: #2563eb;
+  --aero-primary-hover: #1d4ed8;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: var(--aero-bg);
+    color: var(--aero-ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+}
+
+.code-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+.aero-grid-pattern {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

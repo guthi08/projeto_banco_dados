@@ -1,0 +1,55 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: drone-monitor-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-drone_monitor}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123}
+      MYSQL_USER: ${MYSQL_USER:-drone_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-drone123}
+      TZ: America/Sao_Paulo
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-root123}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  drone-api:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    container_name: drone-monitor-api
+    restart: unless-stopped
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/${MYSQL_DATABASE:-drone_monitor}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-drone_user}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD:-drone123}
+      APP_JWT_SECRET: ${APP_JWT_SECRET:-drone-monitor-secret-key-super-segura-com-mais-de-32-bytes-2026}
+      APP_CORS_ALLOWED_ORIGINS: ${APP_CORS_ALLOWED_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      APP_SEED_ENABLED: ${APP_SEED_ENABLED:-true}
+    ports:
+      - "${API_PORT:-8080}:8080"
+
+  drone-frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    container_name: drone-monitor-frontend
+    restart: unless-stopped
+    depends_on:
+      - drone-api
+    environment:
+      NUXT_PUBLIC_API_BASE_URL: ${NUXT_PUBLIC_API_BASE_URL:-http://localhost:8080/api/v1}
+    ports:
+      - "${FRONTEND_PORT:-3000}:3000"
+
+volumes:
+  mysql_data:
