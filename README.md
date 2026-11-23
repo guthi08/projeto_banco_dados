@@ -2,7 +2,7 @@
 
 Plataforma Full-Stack desenvolvida em **Java 21 + Spring Boot 3** (Back-End RESTful), **Nuxt 3 + Vue 3 + Nuxt UI + Tailwind CSS** (Front-End), **MySQL 8** (persistência relacional) e **Docker / Docker Compose**, projetada para planejar, controlar, validar e auditar operações comerciais de voo com drones (RPAS) em conformidade com as normas da ANAC.
 
-> **Vídeo de Apresentação (2 a 5 min):** _[INSIRA AQUI O LINK DO VÍDEO NO GOOGLE DRIVE OU YOUTUBE NÃO LISTADO]_
+
 
 ---
 
